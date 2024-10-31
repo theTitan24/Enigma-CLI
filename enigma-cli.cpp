@@ -145,14 +145,13 @@ int main() {
     Plugboard pb(plugboardConfig);  // Create the Plugboard;
 
     Enigma enigma(&pb, rotors[0], rotors[1], rotors[2], reflector); // Create the Enigma Machine
+    enigma.setRotors(rotorConfig);  // Set the Rotor Postions
+    enigma.setRings(ringConfig);    // Set the Ring Postions
     
 
     std::cout << "\n--- Encoding Phase ---" << std::endl;
 
     encode:
-        enigma.setRotors(rotorConfig);  // Set the Rotor Postions
-        enigma.setRings(ringConfig);    // Set the Ring Postions
-
         std::string input, output = "";
 
         std::cin.clear();
@@ -170,6 +169,14 @@ int main() {
         }
 
         std::cout << "\n" << output << std::endl;
+
+    char op;
+    std::cout << "\nContinue Encoding (With current settings) [y/n]? ";
+    std::cin >> op;
+
+    if(tolower(op) == 'y') {
+        goto encode;
+    }
 
     return 0;
 }
