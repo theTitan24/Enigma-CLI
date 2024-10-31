@@ -28,10 +28,10 @@ class Enigma {
         }
 
         // Set the rotors
-        void setRotors(char rotorConfig[3]) {
-            rotor1.rotateToLetter(rotorConfig[0]);
-            rotor2.rotateToLetter(rotorConfig[1]);
-            rotor3.rotateToLetter(rotorConfig[2]);
+        void setRotors(std::string rotorConfig) {
+            rotor1.rotateToLetter(toupper(rotorConfig[0]));
+            rotor2.rotateToLetter(toupper(rotorConfig[1]));
+            rotor3.rotateToLetter(toupper(rotorConfig[2]));
         }
 
         // Set the rings
@@ -44,7 +44,7 @@ class Enigma {
 
         // Encodes a character
         char encipher(char ch) {
-            
+
             // Rotate the Rotor(s)
             // Rotation when all rotors step, along with the double step anomaly
             if((rotor2.reachedNotch() && rotor3.reachedNotch()) || rotor2.reachedNotch()) {
@@ -63,7 +63,8 @@ class Enigma {
             }
             
             // Let's go through the encoding process in the machine
-            int signal = kb.encode(ch);         // Convert char into signal
+            ch = toupper(ch);                   // Convert ch to uppercase
+            int signal = kb.encode(ch);         // Convert ch into signal
 
             signal = pb.encode(signal);         // Forward Pass through Plugboard
 
