@@ -68,7 +68,7 @@ void configure() {
     // Input Plugboard Configuration
     std::cout << "\n--- Plugboard ---" << "\nPlease Enter Plugboard Configuration: " << std::endl;
     std::cin >> plugboardConfig;
-    if(plugboardConfig.length() != 26) {
+    if(plugboardConfig.length() != 26) {    // Checks for improper plugboard config
         std::cout << "Using No Plugs (Empty / Incorrect Configuration)..." << std::endl;
         plugboardConfig = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     }
@@ -140,7 +140,7 @@ void configure() {
 
 int main() {
 
-    configure();    // Configure
+    configure();    // Configure the variables
 
     Plugboard pb(plugboardConfig);  // Create the Plugboard;
 
@@ -151,32 +151,32 @@ int main() {
 
     std::cout << "\n--- Encoding Phase ---" << std::endl;
 
-    encode:
-        std::string input, output = "";
+    encode: // Encode block to code every message
+        std::string input, output = ""; // Variables to store the input and output
 
-        std::cin.clear();
-        std::cin.ignore(1000, '\n');
+        std::cin.clear();               // Clear the cin buffer
+        std::cin.ignore(1000, '\n');    // Ignaore all characters till newline
         std::cout << "\nPlease Enter the Message: " << std::endl;   
-        std::getline(std::cin, input);
+        std::getline(std::cin, input);  // Input the message
 
-        for(int i = 0; i < input.length(); i++) {
-            if(isalpha(input[i])) {
-                output.push_back(enigma.encipher(input[i]));
+        for(int i = 0; i < input.length(); i++) {               // Loops through every character
+            if(isalpha(input[i])) {                             // Checks if it is an alphabet
+                output.push_back(enigma.encipher(input[i]));    // Encodes and pushes it into output string
             }
             else {
-                output.push_back(input[i]);
+                output.push_back(input[i]);                     // Pushes back the numbers and special characters
             }
         }
 
-        std::cout << "\n" << output << std::endl;
+        std::cout << "\n" << output << std::endl;               // Display the output
 
     char op;
     std::cout << "\nContinue Encoding (With current settings) [y/n]? ";
-    std::cin >> op;
+    std::cin >> op;     // Checks if needed to go for another pass
 
     if(tolower(op) == 'y') {
-        goto encode;
+        goto encode;    // Goes back to encode block
     }
 
-    return 0;
+    return 0;           // Ends successfully
 }

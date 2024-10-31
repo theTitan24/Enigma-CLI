@@ -19,6 +19,7 @@ class Enigma {
 
 
     public:
+        // Import the pointers to Plugboard, Rotors and Reflector, and set them to the objects
         Enigma(Plugboard *pb, Rotor *r1, Rotor *r2, Rotor *r3, Reflector *ref) {
             this->pb = *pb;
             rotor1 = *r1;
@@ -45,17 +46,20 @@ class Enigma {
         // Encodes a character
         char encipher(char ch) {
 
-            // Rotate the Rotor(s) accounting for the double step anomaly
+            // Rotate the Rotor(s)
+            // Rotate all Rotors normally
             if(rotor2.reachedNotch() && rotor3.reachedNotch()) {
                 rotor1.step();
                 rotor2.step();
                 rotor3.step();
             }
+            // Enigma Double Step anomaly
             else if(rotor2.reachedNotch()) {
                 rotor1.step();
                 rotor2.step();
                 rotor3.step();
             }
+            // Rotation of Rotors 2 and 3
             else if(rotor3.reachedNotch()) {
                 rotor2.step();
                 rotor3.step();
