@@ -145,28 +145,31 @@ int main() {
     Plugboard pb(plugboardConfig);  // Create the Plugboard;
 
     Enigma enigma(&pb, rotors[0], rotors[1], rotors[2], reflector); // Create the Enigma Machine
-    enigma.setRotors(rotorConfig);  // Set the Rotor Postions
-    enigma.setRings(ringConfig);    // Set the Ring Postions
-
-    std::string input, output = "";
+    
 
     std::cout << "\n--- Encoding Phase ---" << std::endl;
 
-    std::cin.clear();
-    std::cin.ignore(1000, '\n');
-    std::cout << "Please Enter the Message: " << std::endl;   
-    std::getline(std::cin, input);
+    encode:
+        enigma.setRotors(rotorConfig);  // Set the Rotor Postions
+        enigma.setRings(ringConfig);    // Set the Ring Postions
 
-    for(int i = 0; i < input.length(); i++) {
-        if(isalpha(input[i])) {
-            output.push_back(enigma.encipher(input[i]));
-        }
-        else {
-            output.push_back(input[i]);
-        }
-    }
+        std::string input, output = "";
 
-    std::cout << "\n" << output << std::endl;
+        std::cin.clear();
+        std::cin.ignore(1000, '\n');
+        std::cout << "\nPlease Enter the Message: " << std::endl;   
+        std::getline(std::cin, input);
+
+        for(int i = 0; i < input.length(); i++) {
+            if(isalpha(input[i])) {
+                output.push_back(enigma.encipher(input[i]));
+            }
+            else {
+                output.push_back(input[i]);
+            }
+        }
+
+        std::cout << "\n" << output << std::endl;
 
     return 0;
 }

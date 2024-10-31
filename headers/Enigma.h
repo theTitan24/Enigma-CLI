@@ -45,14 +45,17 @@ class Enigma {
         // Encodes a character
         char encipher(char ch) {
 
-            // Rotate the Rotor(s)
-            // Rotation when all rotors step, along with the double step anomaly
-            if((rotor2.reachedNotch() && rotor3.reachedNotch()) || rotor2.reachedNotch()) {
+            // Rotate the Rotor(s) accounting for the double step anomaly
+            if(rotor2.reachedNotch() && rotor3.reachedNotch()) {
                 rotor1.step();
                 rotor2.step();
                 rotor3.step();
             }
-            // Only two rotors rotate
+            else if(rotor2.reachedNotch()) {
+                rotor1.step();
+                rotor2.step();
+                rotor3.step();
+            }
             else if(rotor3.reachedNotch()) {
                 rotor2.step();
                 rotor3.step();
