@@ -17,6 +17,7 @@ This version is written completely in C++.
 2. Plugboard.h : Handles the plugboard configuration.
 3. Rotor.h : Defines the basic structure and functions of a Rotor.
 4. Reflector.h : Defines the Functioning of a Rotor.
+5. Enigma.h : This file incorporates all the above-mentioned headers into a single header, which can be configured into a working machine.
 
 **_Executables:_**
 
