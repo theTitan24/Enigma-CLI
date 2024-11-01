@@ -18,7 +18,8 @@ This version is written completely in C++.
 3. Rotor.h : Defines the basic structure and functions of a Rotor.
 4. Reflector.h : Defines the Functioning of a Rotor.
 
-**_Executables_**
+**_Executables:_**
+
 The included _enigma-cli.exe_ is for use in Windows only.
 
 ***
